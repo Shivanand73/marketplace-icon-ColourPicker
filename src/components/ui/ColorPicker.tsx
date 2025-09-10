@@ -32,7 +32,6 @@ export function ColorPicker({
           🎨 Select Background Color
         </h1>
 
-        {/* Use onChange for live updates */}
         <ChromePicker color={color} onChange={handleChange} />
 
         <div className="mt-6 flex flex-col items-center">
@@ -51,6 +50,19 @@ export function ColorPicker({
           <Button
             onClick={onSave}
             disabled={saveStatus === "saving" || saveStatus === "saved"}
+            className={`
+              px-8 py-3 text-lg font-semibold rounded-md transition-colors duration-300
+              ${
+                saveStatus === "saving"
+                  ? "bg-blue-400 cursor-wait"
+                  : saveStatus === "saved"
+                  ? "bg-green-500 hover:bg-green-600"
+                  : saveStatus === "error"
+                  ? "bg-red-500 hover:bg-red-600"
+                  : "bg-blue-600 hover:bg-blue-700"
+              }
+              ${saveStatus === "saving" || saveStatus === "saved" ? "cursor-not-allowed" : "cursor-pointer"}
+            `}
           >
             {saveStatus === "saving"
               ? "Saving..."
